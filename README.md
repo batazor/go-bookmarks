@@ -1,5 +1,16 @@
 # BookMarks
 
+### technology stack
+
+#### Front-End
+
+* Relay
+* GraphQL
+
+#### Back-End
+
+* Go
+
 ### TODO:
 
 1. Create "Hello Page"
