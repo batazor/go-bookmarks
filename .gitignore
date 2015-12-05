@@ -2,15 +2,10 @@
 *.o
 *.a
 *.so
-Go-BookMarks
 
 # Folders
 _obj
 _test
-
-# Architecture specific extensions/prefixes
-*.[568vq]
-[568vq].out
 
 *.cgo1.go
 *.cgo2.c
@@ -23,3 +18,10 @@ _testmain.go
 *.exe
 *.test
 *.prof
+
+
+# Node.js
+node_modules
+
+# Logs
+*.log

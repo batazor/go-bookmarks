@@ -1,5 +1,7 @@
 # BookMarks
 
+Simple service for save link (tag, share and etc) 
+
 ### technology stack
 
 #### Front-End
