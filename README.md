@@ -2,6 +2,13 @@
 
 Simple service for save link (tag, share and etc)
 
+### RUN
+
+```
+go build
+./Go-BookMarks
+```
+
 ### technology stack
 
 #### Front-End

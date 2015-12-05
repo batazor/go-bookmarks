@@ -1,9 +1,11 @@
 {
   "name": "go-bookmarks",
+  "private": true,
   "version": "0.0.1",
   "description": "Simple service for save link",
   "main": "index.js",
   "scripts": {
+    "start": "go run graphql.go & babel-node ./server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -22,5 +24,18 @@
   "bugs": {
     "url": "https://github.com/batazor/Go-BookMarks/issues"
   },
-  "homepage": "https://github.com/batazor/Go-BookMarks#readme"
+  "homepage": "https://github.com/batazor/Go-BookMarks#readme",
+  "dependencies": {
+    "babel": "^6.3.13",
+    "babel-core": "^6.3.13",
+    "babel-loader": "^6.2.0",
+    "babel-relay-plugin": "^0.6.0",
+    "classnames": "^2.2.1",
+    "express": "^4.13.3",
+    "react": "^0.14.3",
+    "react-dom": "^0.14.3",
+    "react-relay": "^0.6.0",
+    "webpack": "^1.12.9",
+    "webpack-dev-server": "^1.14.0"
+  }
 }
