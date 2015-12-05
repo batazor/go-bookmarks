@@ -1,6 +1,6 @@
 # BookMarks
 
-Simple service for save link (tag, share and etc) 
+Simple service for save link (tag, share and etc)
 
 ### technology stack
 
@@ -12,6 +12,7 @@ Simple service for save link (tag, share and etc)
 #### Back-End
 
 * Go
+* NodeJS
 
 ### TODO:
 
