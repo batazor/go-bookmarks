@@ -1,0 +1,26 @@
+{
+  "name": "go-bookmarks",
+  "version": "0.0.1",
+  "description": "Simple service for save link",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/batazor/Go-BookMarks.git"
+  },
+  "keywords": [
+    "bookmarks",
+    "go",
+    "relay",
+    "reactjs",
+    "graphql"
+  ],
+  "author": "Login Viktor <batazor111@gmail.com> (batazor.ru)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/batazor/Go-BookMarks/issues"
+  },
+  "homepage": "https://github.com/batazor/Go-BookMarks#readme"
+}
