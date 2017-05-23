@@ -1,11 +1,12 @@
 package main
 
 import (
-	"github.com/spf13/viper"
-	http "net/http"
-	"github.com/pressly/chi"
 	"github.com/Sirupsen/logrus"
+	"github.com/pressly/chi"
+	"github.com/pressly/chi/middleware"
+	"github.com/spf13/viper"
 	"gopkg.in/mgo.v2"
+	http "net/http"
 )
 
 var log = logrus.New()
@@ -15,12 +16,6 @@ func init() {
 	// it to use a custom JSONFormatter. See the logrus docs for how to
 	// configure the backend at github.com/Sirupsen/logrus
 	log.Formatter = new(logrus.JSONFormatter)
-}
-
-type Book struct {
-	Author string
-	Title string
-	Page int16
 }
 
 func main() {
@@ -51,16 +46,21 @@ func main() {
 	log.Info("Success connect to Mongo")
 	defer session.Close()
 
-
 	// Routes ==================================================================
 	r := chi.NewRouter()
+
+	r.Use(middleware.RequestID)
+	r.Use(middleware.RealIP)
+	r.Use(middleware.Logger)
+	r.Use(middleware.Recoverer)
+
 	r.Get("/", HelloWorld)
+	r.Mount("/books", booksResource{}.Routes())
 
 	// start HTTP-server
 	http.ListenAndServe(":"+PORT, r)
 }
 
 func HelloWorld(w http.ResponseWriter, r *http.Request) {
-	log.Info("GET")
 	w.Write([]byte("Hello World!!!"))
 }
