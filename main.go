@@ -6,7 +6,7 @@ import (
 	"github.com/pressly/chi/middleware"
 	"github.com/spf13/viper"
 	"gopkg.in/mgo.v2"
-	http "net/http"
+	"net/http"
 )
 
 var log = logrus.New()
