@@ -58,6 +58,7 @@ func main() {
 	r.Mount("/books", booksResource{}.Routes())
 
 	// start HTTP-server
+	log.Info("Run services on port " + PORT)
 	http.ListenAndServe(":"+PORT, r)
 }
 

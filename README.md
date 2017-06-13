@@ -29,6 +29,5 @@ go run main
 2. [x] Add Configuration
 3. [x] Add Routing
 4. [x] Vendoring
-4. [ ] Add DB (Neo4j ...)
-5. [ ] Add WebSocket
+4. [X] Add DB (Mongo ...)
 6. [ ] Add Dockerfile
