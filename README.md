@@ -23,3 +23,9 @@ docker-compose up
 + [chi](github.com/pressly/chi) - for routing
 + [glide](github.com/Masterminds/glide) - for vendoring
 
+#### TODO:
+
++ [ ] Swagger
++ [ ] REST blog
++ [ ] Auth
++ [ ] Write test
