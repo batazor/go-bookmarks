@@ -6,7 +6,7 @@ Simple service for save link (tag, share and etc)
 ### RUN
 
 ```
-go run main
+docker-compose up
 ```
 
 
@@ -30,4 +30,4 @@ go run main
 3. [x] Add Routing
 4. [x] Vendoring
 4. [X] Add DB (Mongo ...)
-6. [ ] Add Dockerfile
+6. [x] Add Dockerfile

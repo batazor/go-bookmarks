@@ -8,9 +8,18 @@ services:
     restart: always
     ports:
     - "27017:27017"
-    environment:
-      MONGODB_USER: go
-      MONGODB_PASS: golang-secret-password
-      MONGODB_DATABASE: bookmarks
+#    environment:
+#      MONGODB_USER: go
+#      MONGODB_PASS: golang-secret-password
+#      MONGODB_DATABASE: bookmarks
     volumes:
     - /data/go-bookmarks/mongodb:/data/db
+
+  api:
+    build: .
+    container_name: api
+    restart: always
+    ports:
+    - "4070:4070"
+    depends_on:
+    - mongo

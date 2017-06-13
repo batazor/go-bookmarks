@@ -3,4 +3,4 @@ server:
 
 database:
   mongo:
-    url: "localhost"
+    url: "mongo"
