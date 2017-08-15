@@ -5,14 +5,11 @@ import (
 	"github.com/pressly/chi"
 	"github.com/pressly/chi/middleware"
 	"github.com/spf13/viper"
-	"gopkg.in/mgo.v2"
 	"net/http"
+	"github.com/batazor/go-bookmarks/db"
 )
 
 var log = logrus.New()
-var (
-	mgoSession *mgo.Session
-)
 
 func init() {
 	// Logging =================================================================
@@ -21,16 +18,8 @@ func init() {
 	// configure the backend at github.com/Sirupsen/logrus
 	log.Formatter = new(logrus.JSONFormatter)
 
-	// MongoDB =================================================================
-	MONGO_URL := viper.GetString("database.mongo.url")
-	session, err := mgo.Dial(MONGO_URL)
-	if err != nil {
-		log.Panic("Fail connect to Mongo")
-		panic(err)
-	}
-
-	mgoSession = session
-	log.Info("Success connect to Mongo")
+	// Connect to MongoDB
+	db.Connect()
 }
 
 func main() {
