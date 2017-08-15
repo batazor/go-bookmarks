@@ -1,0 +1,77 @@
+{
+	"variables": [],
+	"info": {
+		"name": "go-bookmarks",
+		"_postman_id": "76e9b725-ac4d-5fa5-2e48-25514bb3dfaa",
+		"description": "Simple service for save link (tag, share and etc)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Hello Wrold",
+			"request": {
+				"url": "{{URL_API}}",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Get list links",
+			"request": {
+				"url": "{{URL_API}}/link",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Create link",
+			"request": {
+				"url": "{{URL_API}}/link",
+				"method": "POST",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Get link",
+			"request": {
+				"url": "{{URL_API}}/link/123456",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Update link",
+			"request": {
+				"url": "{{URL_API}}/link/123456",
+				"method": "PUT",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Delete link",
+			"request": {
+				"url": "{{URL_API}}/link/123456",
+				"method": "DELETE",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
