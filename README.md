@@ -1,5 +1,7 @@
 # BookMarks
 
+[![Docker Automated buil](https://img.shields.io/docker/automated/jrottenberg/ffmpeg.svg)](https://hub.docker.com/r/batazor/go-bookmarks/)
+
 Simple service for saving link (tag, share and etc)
 
 - [Docs](https://documenter.getpostman.com/view/95030/go-bookmarks/6n7Srf9)
