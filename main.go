@@ -8,6 +8,7 @@ import (
 	"net/http"
 	"github.com/batazor/go-bookmarks/db"
 	"github.com/batazor/go-bookmarks/handlers/book"
+	"github.com/pressly/chi/render"
 )
 
 var log = logrus.New()
@@ -41,13 +42,14 @@ func main() {
 	// Routes ==================================================================
 	r := chi.NewRouter()
 
+	r.Use(render.SetContentType(render.ContentTypeJSON))
 	r.Use(middleware.RequestID)
 	r.Use(middleware.RealIP)
 	r.Use(middleware.Logger)
 	r.Use(middleware.Recoverer)
 
 	r.Get("/", HelloWorld)
-	r.Mount("/book", book)
+	r.Mount("/book", book.Routes())
 
 	// start HTTP-server
 	log.Info("Run services on port " + PORT)
