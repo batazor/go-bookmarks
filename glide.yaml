@@ -12,3 +12,4 @@ import:
   version: ^0.1.0
   subpackages:
   - db
+  - handlers/book

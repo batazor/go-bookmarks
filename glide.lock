@@ -1,14 +1,13 @@
-hash: fa7715885455483e8bf50a6700dca029399017d890ba521e24b97af22537e9e5
-updated: 2017-08-15T23:24:05.723944472+03:00
+hash: 66678d764119f3ba1875474182b041bd7fda189fbf132f943b6a0e04fb0f04e6
+updated: 2017-08-16T00:14:57.801952087+03:00
 imports:
 - name: github.com/batazor/go-bookmarks
   version: 11ee73ee1056182def9b1a33d7a93a51c7635a40
   subpackages:
   - db
+  - handlers/book
 - name: github.com/fsnotify/fsnotify
   version: 4da3e2cfbabc9f751898f250b49f2439785783a1
-- name: github.com/go-chi/chi
-  version: 4d1276b86695d93c897e501a6543c5eaca9e49c4
 - name: github.com/hashicorp/hcl
   version: 392dba7d905ed5d04a5794ba89f558b27e2ba1ca
   subpackages:

@@ -18,11 +18,12 @@ var (
 
 func Connect() {
 	MONGO_URL := viper.GetString("database.mongo.url")
-	session, err := mgo.Dial(MONGO_URL)
+	s, err := mgo.Dial(MONGO_URL)
 	if err != nil {
 		log.Panic("Fail connect to Mongo")
 		panic(err)
 	}
-
-	Session = session
+	s.SetSafe(&mgo.Safe{})
+	log.Info("Success connect to MongoDB")
+	Session = s
 }

@@ -7,6 +7,7 @@ import (
 	"github.com/spf13/viper"
 	"net/http"
 	"github.com/batazor/go-bookmarks/db"
+	"github.com/batazor/go-bookmarks/handlers/book"
 )
 
 var log = logrus.New()
@@ -46,7 +47,7 @@ func main() {
 	r.Use(middleware.Recoverer)
 
 	r.Get("/", HelloWorld)
-	r.Mount("/book", linksResource{}.Routes())
+	r.Mount("/book", book)
 
 	// start HTTP-server
 	log.Info("Run services on port " + PORT)
