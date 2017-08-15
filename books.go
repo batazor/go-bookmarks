@@ -11,13 +11,13 @@ type linksResource struct{}
 func (rs linksResource) Routes() chi.Router {
 	r := chi.NewRouter()
 
-	r.Get("/", rs.List)    // Get /links - read a list of links
-	r.Post("/", rs.Create)  // Post /link - create a new and link persist it
+	r.Get("/", rs.List)    // Get /book - read a list of books
+	r.Post("/", rs.Create)  // Post /book - create a new book
 
 	r.Route("/:id", func(r chi.Router) {
-		r.Get("/", rs.Get)       // GET /link/:id - read a single link by :id
-		r.Put("/", rs.Update)    // PUT /links/:id - update a single link by :id
-		r.Delete("/", rs.Delete) // DELETE /links/:id - delete a single link by :id
+		r.Get("/", rs.Get)       // GET /book/:id - read a single book by :id
+		r.Put("/", rs.Update)    // PUT /book/:id - update a single book by :id
+		r.Delete("/", rs.Delete) // DELETE /book/:id - delete a single book by :id
 	})
 
 	return r

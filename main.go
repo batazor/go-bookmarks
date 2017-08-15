@@ -54,7 +54,7 @@ func main() {
 	r.Use(middleware.Recoverer)
 
 	r.Get("/", HelloWorld)
-	r.Mount("/link", linksResource{}.Routes())
+	r.Mount("/book", linksResource{}.Routes())
 
 	// start HTTP-server
 	log.Info("Run services on port " + PORT)
