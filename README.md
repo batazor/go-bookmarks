@@ -2,13 +2,13 @@
 
 Simple service for save link (tag, share and etc)
 
+- [Docs](https://documenter.getpostman.com/view/95030/go-bookmarks/6n7Srf9)
 
 ### RUN
 
 ```
 docker-compose up
 ```
-
 
 ### technology stack
 
@@ -22,10 +22,3 @@ docker-compose up
 + [logrus](github.com/Sirupsen/logrus) - for logging
 + [chi](github.com/pressly/chi) - for routing
 + [glide](github.com/Masterminds/glide) - for vendoring
-
-#### TODO:
-
-+ [ ] Swagger
-+ [ ] REST blog
-+ [ ] Auth
-+ [ ] Write test
