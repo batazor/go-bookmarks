@@ -25,5 +25,4 @@ func Connect() {
 	}
 
 	MongoSession = session
-	log.Info("Success connect to Mongo")
 }
