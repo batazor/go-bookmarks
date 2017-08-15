@@ -1,0 +1,6 @@
+server:
+  port: 4070
+
+database:
+  mongo:
+    url: "mongo"
