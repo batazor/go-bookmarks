@@ -3,8 +3,10 @@ package db
 import (
 	"gopkg.in/mgo.v2"
 	"github.com/spf13/viper"
-	"log"
+	"github.com/Sirupsen/logrus"
 )
+
+var log = logrus.New()
 
 var (
 	//	Session stores mongodb session

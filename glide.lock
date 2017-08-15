@@ -1,8 +1,14 @@
-hash: 64a33a706002855df8bb6093b3d3b20612ab7e7bddd5a09d9b660af8cdc58349
-updated: 2017-06-14T00:37:48.583873256+03:00
+hash: fa7715885455483e8bf50a6700dca029399017d890ba521e24b97af22537e9e5
+updated: 2017-08-15T23:24:05.723944472+03:00
 imports:
+- name: github.com/batazor/go-bookmarks
+  version: 11ee73ee1056182def9b1a33d7a93a51c7635a40
+  subpackages:
+  - db
 - name: github.com/fsnotify/fsnotify
   version: 4da3e2cfbabc9f751898f250b49f2439785783a1
+- name: github.com/go-chi/chi
+  version: 4d1276b86695d93c897e501a6543c5eaca9e49c4
 - name: github.com/hashicorp/hcl
   version: 392dba7d905ed5d04a5794ba89f558b27e2ba1ca
   subpackages:
@@ -15,19 +21,17 @@ imports:
   - json/scanner
   - json/token
 - name: github.com/magiconair/properties
-  version: 51463bfca2576e06c62a8504b5c0f06d61312647
+  version: be5ece7dd465ab0765a9682137865547526d1dfb
 - name: github.com/mitchellh/mapstructure
   version: d0303fe809921458f417bcf828397a65db30a7e4
-- name: github.com/pelletier/go-buffruneio
-  version: c37440a7cf42ac63b919c752ca73a85067e05992
 - name: github.com/pelletier/go-toml
-  version: fe7536c3dee2596cdd23ee9976a17c22bdaae286
+  version: 69d355db5304c0f7f809a2edc054553e7142f016
 - name: github.com/pressly/chi
   version: e6033ea75479391a4bce3918fc119cad31e1cb30
   subpackages:
   - middleware
 - name: github.com/Sirupsen/logrus
-  version: 202f25545ea4cf9b191ff7f846df5d87c9382c2b
+  version: f006c2ac4710855cf0f916dd6b77acf6b048dc6e
 - name: github.com/spf13/afero
   version: 9be650865eab0c12963d8753212f4f9c66cdcf12
   subpackages:
@@ -39,13 +43,18 @@ imports:
 - name: github.com/spf13/pflag
   version: e57e3eeb33f795204c1ca35f56c44f83227c6e66
 - name: github.com/spf13/viper
-  version: a1ecfa6a20bd4ef9e9caded262ee1b1b26847675
+  version: 25b30aa063fc18e48662b86996252eabdcf2f0c7
+- name: golang.org/x/crypto
+  version: b176d7def5d71bdd214203491f89843ed217f420
+  subpackages:
+  - ssh/terminal
 - name: golang.org/x/sys
-  version: 0b25a408a50076fbbcae6b7ac0ea5fbb0b085e79
+  version: 9f7170bcd8e9f4d3691c06401119c46a769a1e03
   subpackages:
   - unix
+  - windows
 - name: golang.org/x/text
-  version: 3491b61b9edc56653ad4333e605e2908e46a036b
+  version: e56139fd9c5bc7244c76116c68e500765bb6db6b
   subpackages:
   - transform
   - unicode/norm
@@ -57,5 +66,5 @@ imports:
   - internal/sasl
   - internal/scram
 - name: gopkg.in/yaml.v2
-  version: cd8b52f8269e0feb286dfeef29f8fe4d5b397e0b
+  version: eb3733d160e74a9c7e442f435eb3bea458e1d19f
 testImports: []

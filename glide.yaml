@@ -8,3 +8,7 @@ import:
   - middleware
 - package: github.com/spf13/viper
 - package: gopkg.in/mgo.v2
+- package: github.com/batazor/go-bookmarks
+  version: ^0.1.0
+  subpackages:
+  - db
