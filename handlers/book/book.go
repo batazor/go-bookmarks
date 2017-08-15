@@ -38,7 +38,7 @@ func List(w http.ResponseWriter, r *http.Request) {
 	books := []models.Book{}
 	err := db.Session.DB("books").C(models.CollectionBook).Find(nil).Sort("-updated_on").All(&books)
 	if err != nil {
-		log.Fatal(err)
+		log.Error(err)
 		w.WriteHeader(http.StatusBadRequest)
 		w.Write([]byte("Get list links"))
 	}
