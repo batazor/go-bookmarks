@@ -1,6 +1,6 @@
 # BookMarks
 
-Simple service for save link (tag, share and etc)
+Simple service for saving link (tag, share and etc)
 
 - [Docs](https://documenter.getpostman.com/view/95030/go-bookmarks/6n7Srf9)
 
