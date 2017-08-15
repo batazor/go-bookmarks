@@ -3,6 +3,7 @@ package main
 import (
 	"github.com/pressly/chi"
 	"net/http"
+	"github.com/batazor/go-bookmarks/db"
 )
 
 type linksResource struct{
@@ -29,7 +30,7 @@ func (rs linksResource) Routes() chi.Router {
 }
 
 func (rs linksResource) List(w http.ResponseWriter, r *http.Request) {
-	mongo := mgoSession.Clone()
+	mongo := db.Session.Clone()
 
 	w.Write([]byte("Get list links"))
 

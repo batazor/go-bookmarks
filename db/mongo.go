@@ -10,7 +10,7 @@ var log = logrus.New()
 
 var (
 	//	Session stores mongodb session
-	MongoSession *mgo.Session
+	Session *mgo.Session
 
 	// Mongo stores the mongodb connection string information
 	Mongo *mgo.DialInfo
@@ -24,5 +24,5 @@ func Connect() {
 		panic(err)
 	}
 
-	MongoSession = session
+	Session = session
 }
