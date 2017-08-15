@@ -33,7 +33,6 @@ func main() {
 	viper.SetDefault("server.port", "4070")
 	PORT := viper.GetString("server.port")
 
-	viper.SetDefault("database.mongo.url", "localhost")
 	MONGO_URL := viper.GetString("database.mongo.url")
 
 	// MongoDB =================================================================

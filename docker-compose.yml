@@ -3,16 +3,13 @@ version: "3"
 services:
 
   mongo:
-    image: mongo:3.4.4
+    image: mongo:3.4.7
     container_name: mongo
     restart: always
     ports:
     - "27017:27017"
-#    environment:
-#      MONGODB_USER: go
-#      MONGODB_PASS: golang-secret-password
-#      MONGODB_DATABASE: bookmarks
     volumes:
+    - ./ops/mongo.conf:/etc/mongo.conf
     - /data/go-bookmarks/mongodb:/data/db
 
   api:

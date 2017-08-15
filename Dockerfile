@@ -1,4 +1,4 @@
-FROM golang:1.8-alpine
+FROM golang:1.8-alpine as builder
 
 ENV GLIDE_VERSION v0.12.3
 
@@ -10,14 +10,13 @@ RUN apk add --update ca-certificates wget git && \
     mv linux-amd64/glide /usr/local/bin/
 
 # Build project
-WORKDIR /go/src/ritfest-go-step-by-step
+WORKDIR /go/src/app
 COPY . .
 RUN glide install
-RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o ritfest-go-step-by-step .
+RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o app .
 
 FROM alpine:latest
-RUN apk --no-cache add ca-certificates
 WORKDIR /root/
-COPY --from=0 /go/src/ritfest-go-step-by-step/ritfest-go-step-by-step .
-COPY --from=0 /go/src/ritfest-go-step-by-step/config.yaml .
-CMD ["./ritfest-go-step-by-step"]
+COPY --from=builder /go/src/app/app .
+COPY --from=builder /go/src/app/config.yaml .
+CMD ["./app"]
