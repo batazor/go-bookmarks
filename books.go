@@ -5,7 +5,12 @@ import (
 	"net/http"
 )
 
-type linksResource struct{}
+type linksResource struct{
+	isbn string
+	title string
+	author string
+	price float32
+}
 
 // Routes creates a REST router for the todos resource
 func (rs linksResource) Routes() chi.Router {
@@ -24,7 +29,11 @@ func (rs linksResource) Routes() chi.Router {
 }
 
 func (rs linksResource) List(w http.ResponseWriter, r *http.Request) {
+	mongo := mgoSession.Clone()
+
 	w.Write([]byte("Get list links"))
+
+	defer mongo.Close()
 }
 
 func (rs linksResource) Create(w http.ResponseWriter, r *http.Request) {

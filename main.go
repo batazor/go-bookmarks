@@ -10,12 +10,27 @@ import (
 )
 
 var log = logrus.New()
+var (
+	mgoSession *mgo.Session
+)
 
 func init() {
+	// Logging =================================================================
 	// Setup the logger backend using Sirupsen/logrus and configure
 	// it to use a custom JSONFormatter. See the logrus docs for how to
 	// configure the backend at github.com/Sirupsen/logrus
 	log.Formatter = new(logrus.JSONFormatter)
+
+	// MongoDB =================================================================
+	MONGO_URL := viper.GetString("database.mongo.url")
+	session, err := mgo.Dial(MONGO_URL)
+	if err != nil {
+		log.Panic("Fail connect to Mongo")
+		panic(err)
+	}
+
+	mgoSession = session
+	log.Info("Success connect to Mongo")
 }
 
 func main() {
@@ -32,18 +47,6 @@ func main() {
 	// if no config is found, use the default(s)
 	viper.SetDefault("server.port", "4070")
 	PORT := viper.GetString("server.port")
-
-	MONGO_URL := viper.GetString("database.mongo.url")
-
-	// MongoDB =================================================================
-	session, err := mgo.Dial(MONGO_URL)
-	if err != nil {
-		log.Panic("Fail connect to Mongo")
-		panic(err)
-	}
-
-	log.Info("Success connect to Mongo")
-	defer session.Close()
 
 	// Routes ==================================================================
 	r := chi.NewRouter()
