@@ -5,45 +5,44 @@ import (
 	"net/http"
 )
 
-type booksResource struct{}
+type linksResource struct{}
 
 // Routes creates a REST router for the todos resource
-func (rs booksResource) Routes() chi.Router {
+func (rs linksResource) Routes() chi.Router {
 	r := chi.NewRouter()
 
-	r.Get("/", rs.List)    // Get /books - read a list of books
-	r.Post("/", rs.Create) // Post /books - create a new and book persist it
-	r.Put("/", rs.Put)
+	r.Get("/", rs.List)    // Get /links - read a list of links
+	r.Post("/", rs.Create)  // Post /link - create a new and link persist it
 
 	r.Route("/:id", func(r chi.Router) {
-		r.Get("/", rs.Get)       // GET /books/:id - read a single book by :id
-		r.Put("/", rs.Update)    // PUT /books/:id - update a single book by :id
-		r.Delete("/", rs.Delete) // DELETE /books/:id - delete a single book by :id
+		r.Get("/", rs.Get)       // GET /link/:id - read a single link by :id
+		r.Put("/", rs.Update)    // PUT /links/:id - update a single link by :id
+		r.Delete("/", rs.Delete) // DELETE /links/:id - delete a single link by :id
 	})
 
 	return r
 }
 
-func (rs booksResource) List(w http.ResponseWriter, r *http.Request) {
-	w.Write([]byte("Get list books"))
+func (rs linksResource) List(w http.ResponseWriter, r *http.Request) {
+	w.Write([]byte("Get list links"))
 }
 
-func (rs booksResource) Create(w http.ResponseWriter, r *http.Request) {
-	w.Write([]byte("Create books"))
+func (rs linksResource) Create(w http.ResponseWriter, r *http.Request) {
+	w.Write([]byte("Create link"))
 }
 
-func (rs booksResource) Put(w http.ResponseWriter, r *http.Request) {
-	w.Write([]byte("Update books"))
+func (rs linksResource) Put(w http.ResponseWriter, r *http.Request) {
+	w.Write([]byte("Update links"))
 }
 
-func (rs booksResource) Get(w http.ResponseWriter, r *http.Request) {
-	w.Write([]byte("Get book"))
+func (rs linksResource) Get(w http.ResponseWriter, r *http.Request) {
+	w.Write([]byte("Get link"))
 }
 
-func (rs booksResource) Update(w http.ResponseWriter, r *http.Request) {
-	w.Write([]byte("Update book"))
+func (rs linksResource) Update(w http.ResponseWriter, r *http.Request) {
+	w.Write([]byte("Update link"))
 }
 
-func (rs booksResource) Delete(w http.ResponseWriter, r *http.Request) {
-	w.Write([]byte("Delete book"))
+func (rs linksResource) Delete(w http.ResponseWriter, r *http.Request) {
+	w.Write([]byte("Delete link"))
 }
