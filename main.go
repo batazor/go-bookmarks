@@ -4,10 +4,10 @@ import (
 	"github.com/Sirupsen/logrus"
 	"github.com/batazor/go-bookmarks/db"
 	"github.com/batazor/go-bookmarks/handlers/book"
+	"github.com/batazor/go-bookmarks/utils"
 	"github.com/go-chi/render"
 	"github.com/pressly/chi"
 	"github.com/pressly/chi/middleware"
-	"github.com/spf13/viper"
 	"net/http"
 )
 
@@ -27,17 +27,7 @@ func init() {
 func main() {
 
 	// Get configuration ======================================================
-	viper.SetConfigName("config")
-	viper.AddConfigPath(".")
-	err := viper.ReadInConfig()
-
-	if err != nil {
-		log.Panic("No configuration file loaded - using defaults")
-	}
-
-	// if no config is found, use the default(s)
-	viper.SetDefault("server.port", "4070")
-	PORT := viper.GetString("server.port")
+	PORT := utils.getenv("PORT", "4070")
 
 	// Routes ==================================================================
 	r := chi.NewRouter()

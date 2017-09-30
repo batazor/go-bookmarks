@@ -1,9 +1,9 @@
 package db
 
 import (
-	"gopkg.in/mgo.v2"
-	"github.com/spf13/viper"
 	"github.com/Sirupsen/logrus"
+	"github.com/batazor/go-bookmarks/utils"
+	"gopkg.in/mgo.v2"
 )
 
 var log = logrus.New()
@@ -17,7 +17,9 @@ var (
 )
 
 func Connect() {
-	MONGO_URL := viper.GetString("database.mongo.url")
+	// Get configuration ======================================================
+	MONGO_URL := utils.getenv("MONGO_URL", "localhost/bookmarks")
+
 	s, err := mgo.Dial(MONGO_URL)
 	if err != nil {
 		log.Panic("Fail connect to Mongo")
