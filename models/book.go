@@ -9,7 +9,7 @@ const (
 
 // Book model
 type Book struct {
-	Id        bson.ObjectId `bson:"_id,omitempty"`
+	Id        bson.ObjectId `json:"id" bson:"_id,omitempty"`
 	Isbn      string        `json:"isbn" bson:"isbn"`
 	Author    string        `json:"author" form:"author" binding:"requered" bson:"author"`
 	Title     string        `json:"title" form:"title" binding:"requered" bson:"title"`

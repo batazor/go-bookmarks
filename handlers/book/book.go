@@ -20,7 +20,7 @@ func Routes() chi.Router {
 	r.Get("/", List)    // Get /book - read a list of books
 	r.Post("/", Create) // Post /book - create a new book
 
-	r.Route("/:id", func(r chi.Router) {
+	r.Route("/:bookId", func(r chi.Router) {
 		r.Get("/", Get)       // GET /book/:id - read a single book by :id
 		r.Put("/", Update)    // PUT /book/:id - update a single book by :id
 		r.Delete("/", Delete) // DELETE /book/:id - delete a single book by :id
@@ -30,6 +30,8 @@ func Routes() chi.Router {
 }
 
 func List(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+
 	books := []models.Book{}
 	err := db.Session.DB("books").C(models.CollectionBook).Find(nil).Sort("-updated_on").All(&books)
 	if err != nil {
@@ -47,6 +49,7 @@ func List(w http.ResponseWriter, r *http.Request) {
 }
 
 func Create(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
 
 	b, err := ioutil.ReadAll(r.Body)
 	defer r.Body.Close()
@@ -83,21 +86,80 @@ func Create(w http.ResponseWriter, r *http.Request) {
 		w.Write([]byte("Don't create link"))
 		return
 	}
+
 	w.Write(output)
 }
 
-func Put(w http.ResponseWriter, r *http.Request) {
-	w.Write([]byte("Update links"))
-}
-
 func Get(w http.ResponseWriter, r *http.Request) {
-	w.Write([]byte("Get link"))
+	w.Header().Set("Content-Type", "application/json")
+
+	if bookId := chi.URLParam(r, "bookId"); bookId != "" {
+		books := models.Book{}
+
+		err := db.Session.DB("books").C(models.CollectionBook).FindId(bson.ObjectIdHex(bookId)).One(&books)
+		if err != nil {
+			log.Error(err)
+			w.WriteHeader(http.StatusBadRequest)
+			w.Write([]byte("Get book by id"))
+		}
+
+		res, err := json.Marshal(&books)
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		w.Write(res)
+	} else {
+		w.WriteHeader(http.StatusBadRequest)
+		w.Write([]byte("Don't get book by this id"))
+	}
 }
 
 func Update(w http.ResponseWriter, r *http.Request) {
-	w.Write([]byte("Update link"))
+	w.Header().Set("Content-Type", "application/json")
+
+	b, err := ioutil.ReadAll(r.Body)
+	defer r.Body.Close()
+	if err != nil {
+		log.Error(err)
+		w.WriteHeader(http.StatusBadRequest)
+		w.Write([]byte("Don't create link"))
+		return
+	}
+
+	var book models.Book
+	err = json.Unmarshal(b, &book)
+	if err != nil {
+		log.Error(err)
+		w.WriteHeader(http.StatusBadRequest)
+		w.Write([]byte("Don't create link"))
+		return
+	}
+
+	if bookId := chi.URLParam(r, "bookId"); bookId != "" {
+		err := db.Session.DB("books").C(models.CollectionBook).UpdateId(bson.ObjectIdHex(bookId), book)
+		if err != nil {
+			log.Error(err)
+			w.WriteHeader(http.StatusBadRequest)
+			w.Write([]byte("Get book by id"))
+		}
+
+		output, err := json.Marshal(book)
+		if err != nil {
+			log.Error(err)
+			w.WriteHeader(http.StatusBadRequest)
+			w.Write([]byte("Don't create link"))
+			return
+		}
+
+		w.Write(output)
+	} else {
+		w.WriteHeader(http.StatusBadRequest)
+		w.Write([]byte("Don't get book by this id"))
+	}
 }
 
 func Delete(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
 	w.Write([]byte("Delete link"))
 }
