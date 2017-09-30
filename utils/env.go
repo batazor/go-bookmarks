@@ -1,6 +1,8 @@
 package utils
 
-import "os"
+import (
+	"os"
+)
 
 func getenv(key, fallback string) string {
 	value := os.Getenv(key)
