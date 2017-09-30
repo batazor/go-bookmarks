@@ -1,8 +1,4 @@
-## 0.1.0
+# Change Log
 
-1. Create "Hello Page"
-2. Add Configuration
-3. Add Routing
-4. Vendoring
-4. Add DB (Mongo ...)
-6. Add Dockerfile
+This project adheres to [Semantic Versioning](http://semver.org/).  
+Every release, along with the migration instructions, is documented on the Github [Releases](https://github.com/batazor/go-bookmarks/releases) page.
