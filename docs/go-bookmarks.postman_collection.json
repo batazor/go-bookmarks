@@ -8,65 +8,89 @@
 	},
 	"item": [
 		{
-			"name": "Hello Wrold",
-			"request": {
-				"url": "{{URL_API}}",
-				"method": "GET",
-				"header": [],
-				"body": {},
-				"description": ""
-			},
-			"response": []
+          "name": "books",
+          "description": "",
+          "item": [
+            {
+              "name": "Get list books",
+              "request": {
+                "url": "{{URL_API}}/book",
+                "method": "GET",
+                "header": [],
+                "body": {},
+                "description": ""
+              },
+              "response": []
+            },
+            {
+              "name": "Add book",
+              "request": {
+                "url": "{{URL_API}}/book",
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "description": ""
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n\t\"isbn\": \"978-1491989142\",\n\t\"title\": \"Learning React Native: Building Native Mobile Apps with JavaScript\",\n\t\"author\": \"Bonnie Eisenman\",\n\t\"price\": 5999\n}"
+                },
+                "description": ""
+              },
+              "response": []
+            },
+            {
+              "name": "Get book",
+              "request": {
+                "url": "{{URL_API}}/book/59cfb286106a6c77a3408120",
+                "method": "GET",
+                "header": [],
+                "body": {},
+                "description": ""
+              },
+              "response": []
+            },
+            {
+              "name": "Update book",
+              "request": {
+                "url": "{{URL_API}}/book/59cfb286106a6c77a3408120",
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "description": ""
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n\t\"isbn\": \"978-1491989142\",\n\t\"title\": \"Learning React Native: Building Native Mobile Apps with JavaScript\",\n\t\"author\": \"Bonnie Eisenman\",\n\t\"price\": 3600\n}"
+                },
+                "description": ""
+              },
+              "response": []
+            },
+            {
+              "name": "Delete book",
+              "request": {
+                "url": "{{URL_API}}/book/59cf7d0592b4a8b1baf2ae75",
+                "method": "DELETE",
+                "header": [],
+                "body": {},
+                "description": ""
+              },
+              "response": []
+            }
+          ]
 		},
 		{
-			"name": "Get list links",
+          "name": "Hello Wrold",
 			"request": {
-				"url": "{{URL_API}}/link",
-				"method": "GET",
-				"header": [],
-				"body": {},
-				"description": ""
-			},
-			"response": []
-		},
-		{
-			"name": "Create link",
-			"request": {
-				"url": "{{URL_API}}/link",
-				"method": "POST",
-				"header": [],
-				"body": {},
-				"description": ""
-			},
-			"response": []
-		},
-		{
-			"name": "Get link",
-			"request": {
-				"url": "{{URL_API}}/link/123456",
-				"method": "GET",
-				"header": [],
-				"body": {},
-				"description": ""
-			},
-			"response": []
-		},
-		{
-			"name": "Update link",
-			"request": {
-				"url": "{{URL_API}}/link/123456",
-				"method": "PUT",
-				"header": [],
-				"body": {},
-				"description": ""
-			},
-			"response": []
-		},
-		{
-			"name": "Delete link",
-			"request": {
-				"url": "{{URL_API}}/link/123456",
-				"method": "DELETE",
+              "url": "{{URL_API}}",
+              "method": "GET",
 				"header": [],
 				"body": {},
 				"description": ""
