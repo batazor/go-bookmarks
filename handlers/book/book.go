@@ -1,29 +1,24 @@
 package book
 
 import (
-	"github.com/pressly/chi"
-	"net/http"
+	"encoding/json"
+	"github.com/Sirupsen/logrus"
 	"github.com/batazor/go-bookmarks/db"
 	"github.com/batazor/go-bookmarks/models"
-	"github.com/Sirupsen/logrus"
-	"encoding/json"
+	"github.com/pressly/chi"
+	"gopkg.in/mgo.v2/bson"
+	"io/ioutil"
+	"net/http"
 )
 
 var log = logrus.New()
-
-type linksResource struct{
-	isbn string
-	title string
-	author string
-	price float32
-}
 
 // Routes creates a REST router for the todos resource
 func Routes() chi.Router {
 	r := chi.NewRouter()
 
 	r.Get("/", List)    // Get /book - read a list of books
-	r.Post("/", Create)  // Post /book - create a new book
+	r.Post("/", Create) // Post /book - create a new book
 
 	r.Route("/:id", func(r chi.Router) {
 		r.Get("/", Get)       // GET /book/:id - read a single book by :id
@@ -52,7 +47,43 @@ func List(w http.ResponseWriter, r *http.Request) {
 }
 
 func Create(w http.ResponseWriter, r *http.Request) {
-	w.Write([]byte("Create link"))
+
+	b, err := ioutil.ReadAll(r.Body)
+	defer r.Body.Close()
+	if err != nil {
+		log.Error(err)
+		w.WriteHeader(http.StatusBadRequest)
+		w.Write([]byte("Don't create link"))
+		return
+	}
+
+	var book models.Book
+	err = json.Unmarshal(b, &book)
+	if err != nil {
+		log.Error(err)
+		w.WriteHeader(http.StatusBadRequest)
+		w.Write([]byte("Don't create link"))
+		return
+	}
+
+	id := bson.NewObjectId()
+	book.Id = id
+	err = db.Session.DB("books").C(models.CollectionBook).Insert(book)
+	if err != nil {
+		log.Error(err)
+		w.WriteHeader(http.StatusBadRequest)
+		w.Write([]byte("Don't create link"))
+		return
+	}
+
+	output, err := json.Marshal(book)
+	if err != nil {
+		log.Error(err)
+		w.WriteHeader(http.StatusBadRequest)
+		w.Write([]byte("Don't create link"))
+		return
+	}
+	w.Write(output)
 }
 
 func Put(w http.ResponseWriter, r *http.Request) {

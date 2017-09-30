@@ -8,11 +8,12 @@ const (
 )
 
 // Book model
-type Book struct{
-	Id        bson.ObjectId `json:"_id,omitempty" bson:"_id,omintempty"`
-	Title     string        `json:"body" form:"body" binding:"requered" bson:"body"`
+type Book struct {
+	Id        bson.ObjectId `bson:"_id,omitempty"`
+	Isbn      string        `json:"isbn" bson:"isbn"`
 	Author    string        `json:"author" form:"author" binding:"requered" bson:"author"`
-	Price     float32       `json:"price" form:"price" bson:"price"`
+	Title     string        `json:"title" form:"title" binding:"requered" bson:"title"`
+	Price     int32         `json:"price" form:"price" bson:"price"`
 	CreatedOn int64         `json:"created_on" bson:"created_od"`
 	UpdatedOn int64         `json:"updated_on" bson:"updated_on"`
 }
