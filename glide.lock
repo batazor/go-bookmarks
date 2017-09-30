@@ -1,5 +1,5 @@
 hash: 66678d764119f3ba1875474182b041bd7fda189fbf132f943b6a0e04fb0f04e6
-updated: 2017-08-16T00:14:57.801952087+03:00
+updated: 2017-09-30T03:31:36.839092127+03:00
 imports:
 - name: github.com/batazor/go-bookmarks
   version: 11ee73ee1056182def9b1a33d7a93a51c7635a40
@@ -9,7 +9,7 @@ imports:
 - name: github.com/fsnotify/fsnotify
   version: 4da3e2cfbabc9f751898f250b49f2439785783a1
 - name: github.com/hashicorp/hcl
-  version: 392dba7d905ed5d04a5794ba89f558b27e2ba1ca
+  version: 68e816d1c783414e79bc65b3994d9ab6b0a722ab
   subpackages:
   - hcl/ast
   - hcl/parser
@@ -20,40 +20,41 @@ imports:
   - json/scanner
   - json/token
 - name: github.com/magiconair/properties
-  version: be5ece7dd465ab0765a9682137865547526d1dfb
+  version: 8d7837e64d3c1ee4e54a880c5a920ab4316fc90a
 - name: github.com/mitchellh/mapstructure
   version: d0303fe809921458f417bcf828397a65db30a7e4
 - name: github.com/pelletier/go-toml
-  version: 69d355db5304c0f7f809a2edc054553e7142f016
+  version: 16398bac157da96aa88f98a2df640c7f32af1da2
 - name: github.com/pressly/chi
   version: e6033ea75479391a4bce3918fc119cad31e1cb30
   subpackages:
   - middleware
+  - render
 - name: github.com/Sirupsen/logrus
   version: f006c2ac4710855cf0f916dd6b77acf6b048dc6e
 - name: github.com/spf13/afero
-  version: 9be650865eab0c12963d8753212f4f9c66cdcf12
+  version: ee1bd8ee15a1306d1f9201acc41ef39cd9f99a1b
   subpackages:
   - mem
 - name: github.com/spf13/cast
   version: acbeb36b902d72a7a4c18e8f3241075e7ab763e4
 - name: github.com/spf13/jwalterweatherman
-  version: 0efa5202c04663c757d84f90f5219c1250baf94f
+  version: 12bd96e66386c1960ab0f74ced1362f66f552f7b
 - name: github.com/spf13/pflag
-  version: e57e3eeb33f795204c1ca35f56c44f83227c6e66
+  version: 7aff26db30c1be810f9de5038ec5ef96ac41fd7c
 - name: github.com/spf13/viper
-  version: 25b30aa063fc18e48662b86996252eabdcf2f0c7
+  version: d9cca5ef33035202efb1586825bdbb15ff9ec3ba
 - name: golang.org/x/crypto
-  version: b176d7def5d71bdd214203491f89843ed217f420
+  version: 76eec36fa14229c4b25bb894c2d0e591527af429
   subpackages:
   - ssh/terminal
 - name: golang.org/x/sys
-  version: 9f7170bcd8e9f4d3691c06401119c46a769a1e03
+  version: 314a259e304ff91bd6985da2a7149bbf91237993
   subpackages:
   - unix
   - windows
 - name: golang.org/x/text
-  version: e56139fd9c5bc7244c76116c68e500765bb6db6b
+  version: 1cbadb444a806fd9430d14ad08967ed91da4fa0a
   subpackages:
   - transform
   - unicode/norm
