@@ -5,17 +5,23 @@ import (
 	"github.com/pressly/chi"
 	"github.com/pressly/chi/middleware"
 	"github.com/spf13/viper"
-	"gopkg.in/mgo.v2"
 	"net/http"
+	"github.com/batazor/go-bookmarks/db"
+	"github.com/batazor/go-bookmarks/handlers/book"
+	"github.com/pressly/chi/render"
 )
 
 var log = logrus.New()
 
 func init() {
+	// Logging =================================================================
 	// Setup the logger backend using Sirupsen/logrus and configure
 	// it to use a custom JSONFormatter. See the logrus docs for how to
 	// configure the backend at github.com/Sirupsen/logrus
 	log.Formatter = new(logrus.JSONFormatter)
+
+	// Connect to MongoDB
+	db.Connect()
 }
 
 func main() {
@@ -33,29 +39,17 @@ func main() {
 	viper.SetDefault("server.port", "4070")
 	PORT := viper.GetString("server.port")
 
-	viper.SetDefault("database.mongo.url", "localhost")
-	MONGO_URL := viper.GetString("database.mongo.url")
-
-	// MongoDB =================================================================
-	session, err := mgo.Dial(MONGO_URL)
-	if err != nil {
-		log.Panic("Fail connect to Mongo")
-		panic(err)
-	}
-
-	log.Info("Success connect to Mongo")
-	defer session.Close()
-
 	// Routes ==================================================================
 	r := chi.NewRouter()
 
+	r.Use(render.SetContentType(render.ContentTypeJSON))
 	r.Use(middleware.RequestID)
 	r.Use(middleware.RealIP)
 	r.Use(middleware.Logger)
 	r.Use(middleware.Recoverer)
 
 	r.Get("/", HelloWorld)
-	r.Mount("/books", booksResource{}.Routes())
+	r.Mount("/book", book.Routes())
 
 	// start HTTP-server
 	log.Info("Run services on port " + PORT)

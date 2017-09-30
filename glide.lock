@@ -1,8 +1,8 @@
 hash: 66678d764119f3ba1875474182b041bd7fda189fbf132f943b6a0e04fb0f04e6
-updated: 2017-09-30T03:31:36.839092127+03:00
+updated: 2017-09-30T19:11:20.026988819+03:00
 imports:
 - name: github.com/batazor/go-bookmarks
-  version: 11ee73ee1056182def9b1a33d7a93a51c7635a40
+  version: d4143d2c7b401367f247aa2ae7b6756384f9c5ea
   subpackages:
   - db
   - handlers/book

@@ -1,14 +1,16 @@
 # BookMarks
 
-Simple service for save link (tag, share and etc)
+[![Docker Automated buil](https://img.shields.io/docker/automated/jrottenberg/ffmpeg.svg)](https://hub.docker.com/r/batazor/go-bookmarks/)
 
+Simple service for saving link (tag, share and etc)
+
+- [Docs](https://documenter.getpostman.com/view/95030/go-bookmarks/6n7Srf9)
 
 ### RUN
 
 ```
 docker-compose up
 ```
-
 
 ### technology stack
 
@@ -22,12 +24,3 @@ docker-compose up
 + [logrus](github.com/Sirupsen/logrus) - for logging
 + [chi](github.com/pressly/chi) - for routing
 + [glide](github.com/Masterminds/glide) - for vendoring
-
-### TODO:
-
-1. [x] Create "Hello Page"
-2. [x] Add Configuration
-3. [x] Add Routing
-4. [x] Vendoring
-4. [X] Add DB (Mongo ...)
-6. [x] Add Dockerfile
