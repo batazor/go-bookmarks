@@ -2,13 +2,13 @@ package main
 
 import (
 	"github.com/Sirupsen/logrus"
+	"github.com/batazor/go-bookmarks/db"
+	"github.com/batazor/go-bookmarks/handlers/book"
+	"github.com/go-chi/render"
 	"github.com/pressly/chi"
 	"github.com/pressly/chi/middleware"
 	"github.com/spf13/viper"
 	"net/http"
-	"github.com/batazor/go-bookmarks/db"
-	"github.com/batazor/go-bookmarks/handlers/book"
-	"github.com/pressly/chi/render"
 )
 
 var log = logrus.New()

@@ -20,7 +20,7 @@ func Routes() chi.Router {
 	r.Get("/", List)    // Get /book - read a list of books
 	r.Post("/", Create) // Post /book - create a new book
 
-	r.Route("/:bookId", func(r chi.Router) {
+	r.Route("/{bookId}", func(r chi.Router) {
 		r.Get("/", Get)       // GET /book/:id - read a single book by :id
 		r.Put("/", Update)    // PUT /book/:id - update a single book by :id
 		r.Delete("/", Delete) // DELETE /book/:id - delete a single book by :id
@@ -95,6 +95,7 @@ func Get(w http.ResponseWriter, r *http.Request) {
 
 	if bookId := chi.URLParam(r, "bookId"); bookId != "" {
 		books := models.Book{}
+		log.Info("bookId", bookId)
 
 		err := db.Session.DB("books").C(models.CollectionBook).FindId(bson.ObjectIdHex(bookId)).One(&books)
 		if err != nil {

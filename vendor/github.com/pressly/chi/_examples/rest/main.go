@@ -45,13 +45,12 @@ import (
 	"fmt"
 	"math/rand"
 	"net/http"
-
 	"strings"
 
-	"github.com/pressly/chi"
-	"github.com/pressly/chi/docgen"
-	"github.com/pressly/chi/middleware"
-	"github.com/pressly/chi/render"
+	"github.com/go-chi/chi"
+	"github.com/go-chi/chi/middleware"
+	"github.com/go-chi/docgen"
+	"github.com/go-chi/render"
 )
 
 var routes = flag.Bool("routes", false, "Generate router documentation")
@@ -64,6 +63,7 @@ func main() {
 	r.Use(middleware.RequestID)
 	r.Use(middleware.Logger)
 	r.Use(middleware.Recoverer)
+	r.Use(middleware.URLFormat)
 	r.Use(render.SetContentType(render.ContentTypeJSON))
 
 	r.Get("/", func(w http.ResponseWriter, r *http.Request) {
@@ -84,12 +84,15 @@ func main() {
 		r.Post("/", CreateArticle)       // POST /articles
 		r.Get("/search", SearchArticles) // GET /articles/search
 
-		r.Route("/:articleID", func(r chi.Router) {
+		r.Route("/{articleID}", func(r chi.Router) {
 			r.Use(ArticleCtx)            // Load the *Article on the request context
 			r.Get("/", GetArticle)       // GET /articles/123
 			r.Put("/", UpdateArticle)    // PUT /articles/123
 			r.Delete("/", DeleteArticle) // DELETE /articles/123
 		})
+
+		// GET /articles/whats-up
+		r.With(ArticleCtx).Get("/{articleSlug:[a-z-]+}", GetArticle)
 	})
 
 	// Mount the admin sub-router, which btw is the same as:
@@ -102,7 +105,7 @@ func main() {
 	if *routes {
 		// fmt.Println(docgen.JSONRoutesDoc(r))
 		fmt.Println(docgen.MarkdownRoutesDoc(r, docgen.MarkdownOpts{
-			ProjectPath: "github.com/pressly/chi",
+			ProjectPath: "github.com/go-chi/chi",
 			Intro:       "Welcome to the chi/_examples/rest generated docs.",
 		}))
 		return
@@ -123,12 +126,22 @@ func ListArticles(w http.ResponseWriter, r *http.Request) {
 // the Article could not be found, we stop here and return a 404.
 func ArticleCtx(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		articleID := chi.URLParam(r, "articleID")
-		article, err := dbGetArticle(articleID)
+		var article *Article
+		var err error
+
+		if articleID := chi.URLParam(r, "articleID"); articleID != "" {
+			article, err = dbGetArticle(articleID)
+		} else if articleSlug := chi.URLParam(r, "articleSlug"); articleSlug != "" {
+			article, err = dbGetArticleBySlug(articleSlug)
+		} else {
+			render.Render(w, r, ErrNotFound)
+			return
+		}
 		if err != nil {
 			render.Render(w, r, ErrNotFound)
 			return
 		}
+
 		ctx := context.WithValue(r.Context(), "article", article)
 		next.ServeHTTP(w, r.WithContext(ctx))
 	})
@@ -215,7 +228,7 @@ func adminRouter() chi.Router {
 	r.Get("/accounts", func(w http.ResponseWriter, r *http.Request) {
 		w.Write([]byte("admin: list accounts.."))
 	})
-	r.Get("/users/:userId", func(w http.ResponseWriter, r *http.Request) {
+	r.Get("/users/{userId}", func(w http.ResponseWriter, r *http.Request) {
 		w.Write([]byte(fmt.Sprintf("admin: view user id %v", chi.URLParam(r, "userId"))))
 	})
 	return r
@@ -276,12 +289,6 @@ func init() {
 // In a real-world project, it would make sense to put these payloads
 // in another file, or another sub-package.
 //--
-
-// HMMMM.. request and response payloads for an Article could be the same payload
-// type, perhaps will do an example with it as well.
-// type ArticlePayload struct {
-// 	*Article
-// }
 
 type UserPayload struct {
 	*User
@@ -371,6 +378,12 @@ func NewArticleListResponse(articles []*Article) []render.Renderer {
 	return list
 }
 
+// NOTE: as a thought, the request and response payloads for an Article could be the
+// same payload type, perhaps will do an example with it as well.
+// type ArticlePayload struct {
+//   *Article
+// }
+
 //--
 // Error response payloads & renderers
 //--
@@ -428,17 +441,18 @@ type User struct {
 // and powerful data persistence adapter.
 type Article struct {
 	ID     string `json:"id"`
-	UserID int64  `json:"user_id` // the author
+	UserID int64  `json:"user_id"` // the author
 	Title  string `json:"title"`
+	Slug   string `json:"slug"`
 }
 
 // Article fixture data
 var articles = []*Article{
-	{ID: "1", UserID: 100, Title: "Hi"},
-	{ID: "2", UserID: 200, Title: "sup"},
-	{ID: "3", UserID: 300, Title: "alo"},
-	{ID: "4", UserID: 400, Title: "bonjour"},
-	{ID: "5", UserID: 500, Title: "whats up"},
+	{ID: "1", UserID: 100, Title: "Hi", Slug: "hi"},
+	{ID: "2", UserID: 200, Title: "sup", Slug: "sup"},
+	{ID: "3", UserID: 300, Title: "alo", Slug: "alo"},
+	{ID: "4", UserID: 400, Title: "bonjour", Slug: "bonjour"},
+	{ID: "5", UserID: 500, Title: "whats up", Slug: "whats-up"},
 }
 
 // User fixture data
@@ -456,6 +470,15 @@ func dbNewArticle(article *Article) (string, error) {
 func dbGetArticle(id string) (*Article, error) {
 	for _, a := range articles {
 		if a.ID == id {
+			return a, nil
+		}
+	}
+	return nil, errors.New("article not found.")
+}
+
+func dbGetArticleBySlug(slug string) (*Article, error) {
+	for _, a := range articles {
+		if a.Slug == slug {
 			return a, nil
 		}
 	}

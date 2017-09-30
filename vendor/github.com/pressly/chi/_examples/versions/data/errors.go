@@ -4,7 +4,7 @@ import (
 	"errors"
 	"net/http"
 
-	"github.com/pressly/chi/render"
+	"github.com/go-chi/render"
 )
 
 var (

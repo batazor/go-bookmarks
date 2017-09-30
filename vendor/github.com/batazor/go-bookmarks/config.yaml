@@ -1,6 +1,0 @@
-server:
-  port: 4070
-
-database:
-  mongo:
-    url: "localhost/bookmarks"

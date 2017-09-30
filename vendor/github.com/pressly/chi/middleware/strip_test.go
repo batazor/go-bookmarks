@@ -5,7 +5,7 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"github.com/pressly/chi"
+	"github.com/go-chi/chi"
 )
 
 func TestStripSlashes(t *testing.T) {
@@ -24,7 +24,7 @@ func TestStripSlashes(t *testing.T) {
 		w.Write([]byte("root"))
 	})
 
-	r.Route("/accounts/:accountID", func(r chi.Router) {
+	r.Route("/accounts/{accountID}", func(r chi.Router) {
 		r.Get("/", func(w http.ResponseWriter, r *http.Request) {
 			accountID := chi.URLParam(r, "accountID")
 			w.Write([]byte(accountID))
@@ -63,7 +63,7 @@ func TestStripSlashesInRoute(t *testing.T) {
 		w.Write([]byte("hi"))
 	})
 
-	r.Route("/accounts/:accountID", func(r chi.Router) {
+	r.Route("/accounts/{accountID}", func(r chi.Router) {
 		r.Use(StripSlashes)
 		r.Get("/query", func(w http.ResponseWriter, r *http.Request) {
 			accountID := chi.URLParam(r, "accountID")
@@ -104,7 +104,7 @@ func TestRedirectSlashes(t *testing.T) {
 		w.Write([]byte("root"))
 	})
 
-	r.Route("/accounts/:accountID", func(r chi.Router) {
+	r.Route("/accounts/{accountID}", func(r chi.Router) {
 		r.Get("/", func(w http.ResponseWriter, r *http.Request) {
 			accountID := chi.URLParam(r, "accountID")
 			w.Write([]byte(accountID))
@@ -114,25 +114,25 @@ func TestRedirectSlashes(t *testing.T) {
 	ts := httptest.NewServer(r)
 	defer ts.Close()
 
-	if status, resp := testRequest(t, ts, "GET", "/", nil); resp != "root" && status != 200 {
+	if req, resp := testRequest(t, ts, "GET", "/", nil); resp != "root" && req.StatusCode != 200 {
 		t.Fatalf(resp)
 	}
 
 	// NOTE: the testRequest client will follow the redirection..
-	if status, resp := testRequest(t, ts, "GET", "//", nil); resp != "root" && status != 200 {
+	if req, resp := testRequest(t, ts, "GET", "//", nil); resp != "root" && req.StatusCode != 200 {
 		t.Fatalf(resp)
 	}
 
-	if status, resp := testRequest(t, ts, "GET", "/accounts/admin", nil); resp != "admin" && status != 200 {
+	if req, resp := testRequest(t, ts, "GET", "/accounts/admin", nil); resp != "admin" && req.StatusCode != 200 {
 		t.Fatalf(resp)
 	}
 
 	// NOTE: the testRequest client will follow the redirection..
-	if status, resp := testRequest(t, ts, "GET", "/accounts/admin/", nil); resp != "admin" && status != 200 {
+	if req, resp := testRequest(t, ts, "GET", "/accounts/admin/", nil); resp != "admin" && req.StatusCode != 200 {
 		t.Fatalf(resp)
 	}
 
-	if status, resp := testRequest(t, ts, "GET", "/nothing-here", nil); resp != "nothing here" && status != 200 {
+	if req, resp := testRequest(t, ts, "GET", "/nothing-here", nil); resp != "nothing here" && req.StatusCode != 200 {
 		t.Fatalf(resp)
 	}
 }
