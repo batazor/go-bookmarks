@@ -37,7 +37,7 @@ func List(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		log.Error(err)
 		w.WriteHeader(http.StatusBadRequest)
-		w.Write([]byte("Get list links"))
+		w.Write([]byte("{\"success\": false}"))
 	}
 
 	res, err := json.Marshal(&books)
@@ -56,7 +56,7 @@ func Create(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		log.Error(err)
 		w.WriteHeader(http.StatusBadRequest)
-		w.Write([]byte("Don't create link"))
+		w.Write([]byte("{\"success\": false}"))
 		return
 	}
 
@@ -65,7 +65,7 @@ func Create(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		log.Error(err)
 		w.WriteHeader(http.StatusBadRequest)
-		w.Write([]byte("Don't create link"))
+		w.Write([]byte("{\"success\": false}"))
 		return
 	}
 
@@ -75,7 +75,7 @@ func Create(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		log.Error(err)
 		w.WriteHeader(http.StatusBadRequest)
-		w.Write([]byte("Don't create link"))
+		w.Write([]byte("{\"success\": false}"))
 		return
 	}
 
@@ -83,7 +83,7 @@ func Create(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		log.Error(err)
 		w.WriteHeader(http.StatusBadRequest)
-		w.Write([]byte("Don't create link"))
+		w.Write([]byte("{\"success\": false}"))
 		return
 	}
 
@@ -100,7 +100,7 @@ func Get(w http.ResponseWriter, r *http.Request) {
 		if err != nil {
 			log.Error(err)
 			w.WriteHeader(http.StatusBadRequest)
-			w.Write([]byte("Get book by id"))
+			w.Write([]byte("{\"success\": false}"))
 		}
 
 		res, err := json.Marshal(&books)
@@ -111,7 +111,7 @@ func Get(w http.ResponseWriter, r *http.Request) {
 		w.Write(res)
 	} else {
 		w.WriteHeader(http.StatusBadRequest)
-		w.Write([]byte("Don't get book by this id"))
+		w.Write([]byte("{\"success\": false}"))
 	}
 }
 
@@ -123,7 +123,7 @@ func Update(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		log.Error(err)
 		w.WriteHeader(http.StatusBadRequest)
-		w.Write([]byte("Don't create link"))
+		w.Write([]byte("{\"success\": false}"))
 		return
 	}
 
@@ -132,7 +132,7 @@ func Update(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		log.Error(err)
 		w.WriteHeader(http.StatusBadRequest)
-		w.Write([]byte("Don't create link"))
+		w.Write([]byte("{\"success\": false}"))
 		return
 	}
 
@@ -141,25 +141,39 @@ func Update(w http.ResponseWriter, r *http.Request) {
 		if err != nil {
 			log.Error(err)
 			w.WriteHeader(http.StatusBadRequest)
-			w.Write([]byte("Get book by id"))
+			w.Write([]byte("{\"success\": false}"))
 		}
 
 		output, err := json.Marshal(book)
 		if err != nil {
 			log.Error(err)
 			w.WriteHeader(http.StatusBadRequest)
-			w.Write([]byte("Don't create link"))
+			w.Write([]byte("{\"success\": false}"))
 			return
 		}
 
 		w.Write(output)
 	} else {
 		w.WriteHeader(http.StatusBadRequest)
-		w.Write([]byte("Don't get book by this id"))
+		w.Write([]byte("{\"success\": false}"))
 	}
 }
 
 func Delete(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
-	w.Write([]byte("Delete link"))
+
+	if bookId := chi.URLParam(r, "bookId"); bookId != "" {
+		err := db.Session.DB("books").C(models.CollectionBook).RemoveId(bson.ObjectIdHex(bookId))
+		if err != nil {
+			log.Error(err)
+			w.WriteHeader(http.StatusBadRequest)
+			w.Write([]byte("{\"success\": false}"))
+			return
+		}
+
+		w.Write([]byte("{\"success\": true}"))
+	} else {
+		w.WriteHeader(http.StatusBadRequest)
+		w.Write([]byte("{\"success\": false}"))
+	}
 }
