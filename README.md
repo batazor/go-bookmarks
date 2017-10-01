@@ -32,3 +32,4 @@ docker-compose up
 + [logrus](github.com/Sirupsen/logrus) - for logging
 + [chi](github.com/pressly/chi) - for routing
 + [glide](github.com/Masterminds/glide) - for vendoring
++ [prometheus](https://github.com/prometheus/client_golang) - for monitoring
