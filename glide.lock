@@ -1,14 +1,45 @@
-hash: 0bbf3c502ffc87f374b8577bd3f6289abf106cc4cb77abdd8688226ef88a7668
-updated: 2017-10-01T03:56:26.960493604+03:00
+hash: e88fd5d1bf9053ec539f78f9cdaa16654463b160ea2c31024232ae0736774fd9
+updated: 2017-10-01T04:15:35.117175452+03:00
 imports:
+- name: github.com/beorn7/perks
+  version: 4c0e84591b9aa9e6dcfdf3e020114cd81f89d5f9
+  subpackages:
+  - quantile
 - name: github.com/go-chi/chi
   version: 04ec7fc4179604b2390947258f9143eaae23b596
 - name: github.com/go-chi/render
   version: 9f855fadd4b8cde7773f9ef51f6b2705af239519
+- name: github.com/golang/protobuf
+  version: 130e6b02ab059e7b717a096f397c5b60111cae74
+  subpackages:
+  - proto
+- name: github.com/matttproud/golang_protobuf_extensions
+  version: c12348ce28de40eed0136aa2b644d0ee0650e56c
+  subpackages:
+  - pbutil
 - name: github.com/pressly/chi
   version: 04ec7fc4179604b2390947258f9143eaae23b596
   subpackages:
   - middleware
+- name: github.com/prometheus/client_golang
+  version: 967789050ba94deca04a5e84cce8ad472ce313c1
+  subpackages:
+  - prometheus
+  - prometheus/promhttp
+- name: github.com/prometheus/client_model
+  version: 6f3806018612930941127f2a7c6c453ba2c527d2
+  subpackages:
+  - go
+- name: github.com/prometheus/common
+  version: 2f17f4a9d485bf34b4bfaccc273805040e4f86c8
+  subpackages:
+  - expfmt
+  - internal/bitbucket.org/ww/goautoneg
+  - model
+- name: github.com/prometheus/procfs
+  version: e645f4e5aaa8506fc71d6edbc5c4ff02c04c46f2
+  subpackages:
+  - xfs
 - name: github.com/Sirupsen/logrus
   version: f006c2ac4710855cf0f916dd6b77acf6b048dc6e
 - name: golang.org/x/crypto

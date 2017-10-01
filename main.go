@@ -9,6 +9,7 @@ import (
 	"github.com/pressly/chi"
 	"github.com/pressly/chi/middleware"
 	"net/http"
+	"github.com/batazor/go-bookmarks/handlers/prometheus"
 )
 
 var log = logrus.New()
@@ -22,6 +23,9 @@ func init() {
 
 	// Connect to MongoDB
 	db.Connect()
+
+	// Init Prometheus
+	go prometheus.Init()
 }
 
 func main() {

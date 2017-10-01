@@ -9,6 +9,7 @@ Simple service for saving link (tag, share and etc)
 ### RUN
 
 ```
+docker-compose build
 docker-compose up
 ```
 
