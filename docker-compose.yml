@@ -6,8 +6,6 @@ services:
     image: mongo:3.4.9
     container_name: mongo
     restart: always
-    ports:
-    - "27017:27017"
     volumes:
     - ./ops/mongo.conf:/etc/mongo.conf
     - /data/go-bookmarks/mongodb:/data/db
@@ -16,6 +14,9 @@ services:
     build: .
     container_name: api
     restart: always
+    environment:
+      PORT: 4070
+      MONGO_URL: mongo/bookmarks
     ports:
     - "4070:4070"
     depends_on:

@@ -12,15 +12,22 @@ Simple service for saving link (tag, share and etc)
 docker-compose up
 ```
 
+### ENV
+
+| Name ENV         | Default value             |
+|------------------|---------------------------|
+| PORT             | 4070                      |
+| MONGO_URL        | localhost/bookmarks       |
+
 ### technology stack
 
 #### Back-End
 
 * Go
+* MongoDB
 
 #### Library
 
-+ [viper](github.com/spf13/viper) - for configuration
 + [logrus](github.com/Sirupsen/logrus) - for logging
 + [chi](github.com/pressly/chi) - for routing
 + [glide](github.com/Masterminds/glide) - for vendoring

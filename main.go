@@ -27,7 +27,7 @@ func init() {
 func main() {
 
 	// Get configuration ======================================================
-	PORT := utils.getenv("PORT", "4070")
+	PORT := utils.Getenv("PORT", "4070")
 
 	// Routes ==================================================================
 	r := chi.NewRouter()

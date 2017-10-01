@@ -18,7 +18,7 @@ var (
 
 func Connect() {
 	// Get configuration ======================================================
-	MONGO_URL := utils.getenv("MONGO_URL", "localhost/bookmarks")
+	MONGO_URL := utils.Getenv("MONGO_URL", "localhost/bookmarks")
 
 	s, err := mgo.Dial(MONGO_URL)
 	if err != nil {
