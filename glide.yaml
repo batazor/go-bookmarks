@@ -7,10 +7,7 @@ import:
   subpackages:
   - middleware
 - package: gopkg.in/mgo.v2
-- package: github.com/batazor/go-bookmarks
-  subpackages:
-  - db
-  - handlers/book
-  - utils
 - package: github.com/go-chi/chi
   version: ^3.2.1
+- package: github.com/go-chi/render
+  version: ^1.0.0

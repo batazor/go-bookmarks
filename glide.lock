@@ -1,13 +1,6 @@
-hash: 462e41cd68ef5bd6e21a0e7504b74707040aa2509ed7cd1037786f50aa22f146
-updated: 2017-10-01T03:07:53.508147312+03:00
+hash: 0bbf3c502ffc87f374b8577bd3f6289abf106cc4cb77abdd8688226ef88a7668
+updated: 2017-10-01T03:56:26.960493604+03:00
 imports:
-- name: github.com/batazor/go-bookmarks
-  version: 80d2e7e0a413e76c5aafd76bad04e05e8ed5e812
-  subpackages:
-  - db
-  - handlers/book
-  - models
-  - utils
 - name: github.com/go-chi/chi
   version: 04ec7fc4179604b2390947258f9143eaae23b596
 - name: github.com/go-chi/render
