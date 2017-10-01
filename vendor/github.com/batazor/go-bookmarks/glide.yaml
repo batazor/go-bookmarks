@@ -1,0 +1,9 @@
+package: go-bookmarks
+import:
+- package: github.com/Sirupsen/logrus
+  version: ^1.0.0
+- package: github.com/pressly/chi
+  version: ^3.2.1
+  subpackages:
+  - middleware
+- package: gopkg.in/mgo.v2
