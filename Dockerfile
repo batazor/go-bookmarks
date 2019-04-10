@@ -15,7 +15,7 @@ COPY . .
 RUN glide install
 RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o app .
 
-FROM alpine:latest
+FROM scratch:latest
 
 RUN addgroup -S 997 && adduser -S -g 997 997
 USER 997
