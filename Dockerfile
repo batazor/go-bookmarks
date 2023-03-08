@@ -1,4 +1,4 @@
-FROM golang:1.20.1-alpine as builder
+FROM golang:1.20.2-alpine as builder
 
 ENV GLIDE_VERSION v0.13.0
 
