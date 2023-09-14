@@ -3,7 +3,7 @@ version: "3"
 services:
 
   mongo:
-    image: mongo:5.0.20
+    image: mongo:5.0.21
     container_name: mongo
     restart: always
     volumes:
